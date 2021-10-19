@@ -21,7 +21,7 @@ const createManager = manager => {
         `;
     };
 
-}
+
  // Create Engineer Profile
  const createEngineer = engineer => {
     return `
@@ -62,6 +62,7 @@ const createManager = manager => {
 </div>
 `;
 };
+};
 
  //generateHTML: returns the html that index.js will eventually use to inject into the DOM
 
@@ -101,6 +102,6 @@ function generateHtml(data) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     </body>
     </html>`;
-    }
+    };
 
 module.exports = generateHtml;
