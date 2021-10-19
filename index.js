@@ -42,7 +42,7 @@ function addManager() {
             }
         ])
         .then((res) => {
-            const manager = new Manager(res.managerName, res.managerId, res.managerEmail, managerOfficeNumber);
+            const manager = new Manager(res.managerName, res.managerId, res.managerEmail, res.OfficeNumber);
             employees.push(manager);
             team.push(res.managerId);
             addTeam();
@@ -101,7 +101,7 @@ function addEngineer() {
             }
         ])
         .then((res) => {
-            const engineer = new Engineer(res.engineerName, res.engineerId, res.engineerEmail, res.engineer.Github);
+            const engineer = new Engineer(res.engineerName, res.engineerId, res.engineerEmail, res.engineerGithub);
             employees.push(engineer);
             team.push(res.engineerId);
             addTeam();

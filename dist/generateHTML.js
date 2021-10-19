@@ -23,9 +23,46 @@ const createManager = manager => {
 
 }
  // Create Engineer Profile
+ const createEngineer = engineer => {
+    return `
+
+ <div class="card employee-card manager-card">
+            <div class="card-header text-center">
+                <h2 class="card-title">${engineer.getName()}</h2>
+                <h4 class="card-title">Title: ${engineer.getRole()}</h4>
+            </div>
+            <div class="card-body bg-light">
+                <ul class="list-group text-dark">
+                    <li class="list-group-item">ID: ${engineer.getId()}</li>
+                    <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                    <li class="list-group-item">Github: <a href="https://github.com/${engineer.getGithub()}"target="_blank">${engineer.getGithub()}</a></li>
+                </ul>
+            </div>
+        </div>
+        `;
+    };
 
  
  // Create Intern Profile
+ const createIntern = intern => {
+    return `
+
+ <div class="card employee-card manager-card">
+ <div class="card-header text-center">
+     <h2 class="card-title">${intern.getName()}</h2>
+     <h4 class="card-title">Title: ${intern.getRole()}</h4>
+ </div>
+ <div class="card-body bg-light">
+     <ul class="list-group text-dark">
+         <li class="list-group-item">ID: ${intern.getId()}</li>
+         <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+         <li class="list-group-item">School: ${intern.getSchool()}</li>
+     </ul>
+ </div>
+</div>
+`;
+};
+
 
  //generateHTML: returns the html that index.js will eventually use to inject into the DOM
 
