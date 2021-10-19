@@ -141,6 +141,7 @@ function addIntern() {
         });
 }
 
+
     function writeToFile(fileName, data) {
     const htmlContent = generateHTML(data);
 

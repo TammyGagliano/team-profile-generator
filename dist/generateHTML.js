@@ -63,7 +63,6 @@ const createManager = manager => {
 `;
 };
 
-
  //generateHTML: returns the html that index.js will eventually use to inject into the DOM
 
 function generateHtml(data) {
