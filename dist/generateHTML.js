@@ -8,6 +8,7 @@
   a card
 */
 function renderCards(data) {
+    console.log('data: ', data);
     return `<div class="card">
     <div class="card-body">
         <h4 class="card-title">${data.name}</h4>
@@ -28,15 +29,14 @@ function generateHtml(data) {
         const cardSection = renderCards(data[i]);
         cards.push(cardSection);
     }
-
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./styles.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles.css"/>
     <title>Team Profile Generator</title>
 </head>
 <body>
@@ -46,7 +46,7 @@ function generateHtml(data) {
     <div class="container-fluid d-flex flex-row justify-content-center flex-wrap">
         ${cards.join('\n')}
     </div>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>`;
 }

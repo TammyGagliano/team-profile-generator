@@ -1,109 +1,169 @@
-
-const Engineer = require("../lib/Engineer");
-const Manager = require("../lib/Manager");
-const Intern = require("../lib/Intern.js");
 const inquirer = require("inquirer");
 const fs = require("fs");
-// const generateHTML
-// generateCSS
+const path = require("path");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern.js");
+const generateHtml = require("./dist/generateHtml.js");
+const generateCss = require("./dist/generateCss.js");
+const employees = [];
 
+function writeToFile(fileName, data) {
+    const htmlContent = generateHtml(data);
 
-function (fileName, data) {
-    fs.writeFileSync(fileName), data);
+    fs.writeFile(path.join(process.cwd(),fileName), htmlContent, (err) =>
     err ? console.log(err) : console.log("Successfully created HTML file!")
-  }
-  
-  function engineerCard {
-  inquirer prompt ([
-    {
-      type: "input",
-      message: "What is your name?",
-      name: "name",
-    },
-    {
-      type: "input",
-      message: "What is your id?",
-      name: "ID",
-    },
-    {
-      type: "input",
-      message: "What school do you attend?",
-      name: "school",
-    },
-    {
-      type: "...",
-      message: "Would you like add another team member?",
-      choices: ["Engineer", "Intern", "Quit"],
-      name: "member"
-    },
-  ])
+    );
+
+    const cssContent = generateCss();
+
+    fs.writeFile(path.join(process.cwd(), "styles.css"), cssContent, (err) => 
+    err ? console.log(err) : console.log("Succesfully created CSS file!")
+    );
 }
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <div class="col-12 text-center">
-            <h2>My Team</h2>
-        </div>
-    </header>
 
-    <div class="container-fluid">
-    <div class="row">
+function init() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "name"
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id"
+            },
+            {
+                type: "input",
+                message: "What is your e-mail address?",
+                name: "email"
+            },
+            {
+                type: "input",
+                message: "What is your office number?",
+                name: "officenumber"
+            },
+            {
+                type: "rawlist",
+                message: "Would you like add another team member?",
+                choices: ["Engineer", "Intern", "Quit"],
+                name: "choices"
+            }
+        ])
+        .then((res) => {
+            const { name, id, email, officenumber } = res;
 
-        <div class="col-sm-6 col-md-4">
-            <div class="card border-white">
-                <div class="card-header">Heading 1</div>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build 
-                           on the card 
-                        title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-        
+            const manager = new Manager(name, id, email, officenumber);
 
-        <div class="col-sm-6 col-md-4">
-            <div class="card border-white">
-                <div class="card-header">Heading 2</div>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build 
-                          on the card 
-                        title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-    
+            employees.push(manager);
 
-        <div class="col-sm-6 col-md-4">
-            <div class="card border-white">
-                <div class="card-header">Heading 3</div>
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build 
-                         on the card 
-                        title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        
+            switch (res.choices) {
+                case 'Engineer':
+                    return engineerCard();
+                case 'Intern':
+                    return internCard();
+                case 'Quit':
+                    return writeToFile("index.html", employees);
+            }
+        });
+}
+
+function engineerCard() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "name"
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id"
+            },
+            {
+                type: "input",
+                message: "What is your e-mail address?",
+                name: "email"
+            },
+            {
+                type: "input",
+                message: "What is your github username?",
+                name: "github"
+            },
+            {
+                type: "rawlist",
+                message: "Would you like add another team member?",
+                choices: ["Engineer", "Intern", "Quit"],
+                name: "choices"
+            }
+        ])
+        .then((res) => {
+            const engineer = new Engineer(res);
+
+            employees.push(engineer);
+
+            switch (res.choices) {
+                case 'Engineer':
+                    return engineerCard();
+                case 'Intern':
+                    return internCard();
+                case 'Quit':
+                    return writeToFile("index.html", employees);
+            }
+        });
+}
 
 
-    
-</body>
-</html>
+function internCard() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                message: "What is your name?",
+                name: "name"
+            },
+            {
+                type: "input",
+                message: "What is your id?",
+                name: "id"
+            },
+            {
+                type: "input",
+                message: "What is your e-mail address?",
+                name: "email"
+            },
+            {
+                type: "input",
+                message: "What school do you attend?",
+                name: "school"
+            },
+            {
+                type: "rawlist",
+                message: "Would you like add another team member?",
+                choices: ["Engineer", "Intern", "Quit"],
+                name: "choices"
+            }
+        ])
+        .then((res) => {
+            const intern = new Intern(res);
+            
+            employees.push(intern);
 
+            switch (res.choices) {
+                case 'Engineer':
+                    return engineerCard();
+                case 'Intern':
+                    return internCard();
+                case 'Quit':
+                    return writeToFile("index.html", employees);
+            }
+        });
+}
 
-
-
+init();
 
 
 
