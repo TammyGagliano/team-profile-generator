@@ -9,9 +9,11 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern.js");
 const render = require("./dist/generateHtml.js");
+const css = require("./dist/generateCSS.js");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPathCSS = path.join(OUTPUT_DIR, "style.css");
 
 // Create empty arrays for teams as place holders
 const employees = [];
@@ -161,7 +163,7 @@ function init() {
       fs.mkdirSync(OUTPUT_DIR);
     }
     fs.writeFileSync(outputPath, render(employees), "utf-8");
-  }
+  }fs.writeFileSync(outputPathCSS, css(employees), "utf-8");
 
   addManager();
 }
