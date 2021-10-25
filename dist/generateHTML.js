@@ -1,7 +1,5 @@
 // create profile of team members
-
 const createProfile = team => {
-
 
 const createManager = manager => {
   return `
@@ -62,16 +60,34 @@ const createManager = manager => {
 </div>
 `;
 };
-};
 
- //generateHTML: returns the html that index.js will eventually use to inject into the DOM
+//generateHTML: returns the html that index.js will eventually use to inject into the DOM
 
-function generateHtml(data) {
-  const cards = [];
-  for (let i = 0; i < data.length; i++) {
-    const cardSection = renderCards(data[i]);
-    cards.push(cardSection);
-  }
+const html = [];
+
+    html.push(team
+        .filter(employee => employee.getRole() === "Manager")
+        .map(manager => createManager(manager))
+    );
+    html.push(team
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => createEngineer(engineer))
+        .join("")
+    );
+    html.push(team
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => createIntern(intern))
+        .join("")
+    );
+
+    return html.join("");
+
+}
+
+//export function to generate entire page
+
+module.exports = team => {
+
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -102,6 +118,4 @@ function generateHtml(data) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
     </body>
     </html>`;
-    };
-
-module.exports = generateHtml;
+};
