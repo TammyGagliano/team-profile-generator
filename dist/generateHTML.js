@@ -102,11 +102,13 @@ module.exports = team => {
     </head>
     <body>
     <div class="container-fluid">
+        <div class="container-fluid">
         <div class="row">
-            <div class="col-12 jumbotron text-white mb-3">
-                <h1 class="text-center">My Team</h1>
-            </div>
+        <nav class="navbar" id="navbar">
+        <span class="navbar-brand mb-0 h1 w-100 text-center" id="navbar-text">Team Profile</span>
+    </nav>
         </div>
+    </div>
     </div>
     <div class="container">
         <div class="row">

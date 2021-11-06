@@ -12,3 +12,11 @@ Use inquirer from your command line to answer questions about your project. Afte
 This project demonstrates use of OOP and TDD using Jest. Run 'npm test' to run Jest for tests on constructors.
 ## Questions
 If you have any questions about this projects, please contact me directly at tracsd@gmail.com. You can view more of my projects at https://github.com/TammyGagliano/
+
+## Video
+
+https://drive.google.com/file/d/1-cIuc-FxNFLox8hbp_UOLEngG3FDVI0b/view?usp=sharing
+
+
+## Image
+![Team Profile Generator](./teamprofilescreenshot.png)
